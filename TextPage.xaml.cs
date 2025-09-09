@@ -1,4 +1,4 @@
-using UIKit;
+using System.Runtime.CompilerServices;
 
 namespace AnExample;
 
@@ -27,6 +27,7 @@ public partial class TextPage : ContentPage
 			PlaceholderColor = Colors.Gray,
 			FontAttributes = FontAttributes.Italic
 		};
+        editorTeskst.TextChanged += EditorTeskst_TextChanged;
 		hsl = new HorizontalStackLayout
 		{
 			Background = Color.FromRgb(120, 30, 50),
@@ -36,4 +37,9 @@ public partial class TextPage : ContentPage
 		};
 		Content = hsl;
 	}
+
+    private void EditorTeskst_TextChanged(object? sender, TextChangedEventArgs e)
+    {
+        lblTekstl.Text = editorTeskst.Text;
+    }
 }

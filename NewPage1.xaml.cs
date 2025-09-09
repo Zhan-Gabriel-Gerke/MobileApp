@@ -4,8 +4,8 @@ namespace AnExample;
 
 public partial class NewPage1 : ContentPage
 {
-	public List<ContentPage> pagesE = new List<ContentPage>() { new TextPage(), new FigurePage() };
-	public List<string> textsE = new List<string>() { "Text Page !!!", "Figure Page !!!" };
+	public List<ContentPage> pagesE = new List<ContentPage>() { new TextPage(), new FigurePage(), new TimerPage(), new TraficLight() ,new SnowMan() };
+	public List<string> textsE = new List<string>() { "Text Page !!!", "Figure Page !!!", "Timer Page !!!", "Trafic Light", "SnowMan" };
 	ScrollView sv;
 	VerticalStackLayout vsl;
 	public NewPage1()
@@ -34,7 +34,7 @@ public partial class NewPage1 : ContentPage
 
     private async void Btn_Clicked(object? sender, EventArgs e)
     {
-        Button nupp = (Button)sender;
-        await Navigation.PushAsync(pagesE[nupp.ZIndex]);
+        Button butn = (Button)sender;
+        await Navigation.PushAsync(pagesE[butn.ZIndex]);
     }
 }
