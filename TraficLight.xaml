@@ -17,8 +17,8 @@
             HorizontalOptions="Start"
             VerticalOptions="Start">
             <Label
-                    x:Name="statusLable"
-                    Text="Status"
+                    x:Name="statusLabel"
+                    Text="Status: The trafick light isn't working"
                     HorizontalOptions="Start"
                     VerticalOptions="Start"
                     FontSize="20"
@@ -35,52 +35,64 @@
                 <VerticalStackLayout
                 HorizontalOptions="Center"
                 VerticalOptions="Start">
-                <Frame
+                <Frame x:Name="frameRed"
                     BackgroundColor="DarkGray"
                     WidthRequest = "150"
                     HeightRequest = "150"
                     CornerRadius = "150"
                     HasShadow = "False">
-                        <Label
-                        x:Name="labelRed"
-                        Text="Red"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center"
-                        FontSize="20"
-                        TextColor="White"/>
+                    <Label
+                    x:Name="labelRed"
+                    Text="Red"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    FontSize="20"
+                    TextColor="White">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_3"/>
+                        </Label.GestureRecognizers>
+                    </Label>
                 </Frame>
-                <Frame
-                    BackgroundColor="DarkGray"
-                    WidthRequest="150"
-                    HeightRequest="150"
-                    CornerRadius="150"
-                    HasShadow="False">
-                        <Label
+                <Frame x:Name="frameOrange"
+                BackgroundColor="DarkGray"
+                WidthRequest="150"
+                HeightRequest="150"
+                CornerRadius="150"
+                HasShadow="False">
+                    <Label
                         x:Name="labelOrange"
                         Text="Orange"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
                         FontSize="20"
-                        TextColor="White"/>
+                        TextColor="White">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
+                        </Label.GestureRecognizers>
+                    </Label>
                 </Frame>
-                <Frame
-                    BackgroundColor="DarkGray"
-                    WidthRequest="150"
-                    HeightRequest="150"
-                    CornerRadius="150"
-                    HasShadow="False">
-                        <Label
-                        x:Name="labelGreen"
-                        Text="Green"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center"
-                        FontSize="20"
-                        TextColor="White"/>
+                <Frame x:Name="frameGreen"
+                BackgroundColor="DarkGray"
+                WidthRequest="150"
+                HeightRequest="150"
+                CornerRadius="150"
+                HasShadow="False">
+                    <Label
+                    x:Name="labelGreen"
+                    Text="Green"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    FontSize="20"
+                    TextColor="White">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_2"/>
+                    </Label.GestureRecognizers>
+                    </Label>
                 </Frame>
             </VerticalStackLayout>
         </Frame>
         
-        <!--Spacing Distance between buttons, Padding distance between button and the board-->
+        <!--Spacing it's istance between buttons and Padding it's distance between button and the board-->
         <HorizontalStackLayout 
             Spacing="10" Padding="20"
             HorizontalOptions="Center"
@@ -104,7 +116,7 @@
                 WidthRequest="100"
                 HeightRequest="50"/>
             <Button
-                Text="End"
+                Text="Stop"
                 Clicked="Button_Clicked_2"
                 BackgroundColor="Gray"
                 TextColor="White"
@@ -122,8 +134,8 @@
         HorizontalOptions="Start"
         VerticalOptions="End">
             <Label
-                x:Name="statusDayNightLable"
-                Text="Type"
+                x:Name="statusDayNightLabel"
+                Text="Type: Day type"
                 HorizontalOptions="Start"
                 VerticalOptions="Start"
                 FontSize="20"
