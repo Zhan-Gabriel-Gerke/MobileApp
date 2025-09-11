@@ -3,10 +3,131 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AnExample.TraficLight"
              Title="TraficLight">
+    <ContentPage.BackgroundImageSource>
+        <FileImageSource File="street.png"/>
+    </ContentPage.BackgroundImageSource>
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <Frame
+            BackgroundColor="Black"
+            WidthRequest="412"
+            HeightRequest="40"
+            CornerRadius="10"
+            HasShadow="False"
+            Padding="10,5"
+            HorizontalOptions="Start"
+            VerticalOptions="Start">
+            <Label
+                    x:Name="statusLable"
+                    Text="Status"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="20"
+                    TextColor="White"/>
+        </Frame>
+        <Frame
+            BackgroundColor="DimGray"
+            WidthRequest="200"
+            HeightRequest="600"
+            CornerRadius="20"
+            HasShadow="False"
+            HorizontalOptions="Center"
+            VerticalOptions="Start">
+                <VerticalStackLayout
+                HorizontalOptions="Center"
+                VerticalOptions="Start">
+                <Frame
+                    BackgroundColor="DarkGray"
+                    WidthRequest = "150"
+                    HeightRequest = "150"
+                    CornerRadius = "150"
+                    HasShadow = "False">
+                        <Label
+                        x:Name="labelRed"
+                        Text="Red"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        FontSize="20"
+                        TextColor="White"/>
+                </Frame>
+                <Frame
+                    BackgroundColor="DarkGray"
+                    WidthRequest="150"
+                    HeightRequest="150"
+                    CornerRadius="150"
+                    HasShadow="False">
+                        <Label
+                        x:Name="labelOrange"
+                        Text="Orange"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        FontSize="20"
+                        TextColor="White"/>
+                </Frame>
+                <Frame
+                    BackgroundColor="DarkGray"
+                    WidthRequest="150"
+                    HeightRequest="150"
+                    CornerRadius="150"
+                    HasShadow="False">
+                        <Label
+                        x:Name="labelGreen"
+                        Text="Green"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        FontSize="20"
+                        TextColor="White"/>
+                </Frame>
+            </VerticalStackLayout>
+        </Frame>
+        
+        <!--Spacing Distance between buttons, Padding distance between button and the board-->
+        <HorizontalStackLayout 
+            Spacing="10" Padding="20"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            >
+            <Button
+                Text="Start"
+                Clicked="Button_Clicked"
+                Background="Gray"
+                TextColor="White"
+                CornerRadius="20"
+                WidthRequest="100"
+                HeightRequest="50"
+                />
+            <Button
+                Text="Day/Night"
+                Clicked="Button_Clicked_1"
+                BackgroundColor="Gray"
+                TextColor="White"
+                CornerRadius="20"
+                WidthRequest="100"
+                HeightRequest="50"/>
+            <Button
+                Text="End"
+                Clicked="Button_Clicked_2"
+                BackgroundColor="Gray"
+                TextColor="White"
+                CornerRadius="20"
+                WidthRequest="100"
+                HeightRequest="50"/>
+        </HorizontalStackLayout>
+        <Frame
+        BackgroundColor="Black"
+        WidthRequest="412"
+        HeightRequest="50"
+        CornerRadius="10"
+        HasShadow="False"
+        Padding="10,5"
+        HorizontalOptions="Start"
+        VerticalOptions="End">
+            <Label
+                x:Name="statusDayNightLable"
+                Text="Type"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                FontSize="20"
+                TextColor="White"/>
+        </Frame>
     </VerticalStackLayout>
 </ContentPage>
