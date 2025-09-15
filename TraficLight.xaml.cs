@@ -14,6 +14,7 @@ public partial class TraficLight : ContentPage
     private void Button_Clicked(object sender, EventArgs e)
     {
         isRunning = true;
+        Change_Status_Label();
         Start_Trafic_Light();
     }
     //Day/Night
