@@ -74,12 +74,15 @@ public partial class TraficLight : ContentPage
                 //Day type
                 frameRed.BackgroundColor = Colors.Red;
                 await Task.Delay(5000);
+                if (!isRunning) break;
                 frameRed.BackgroundColor = Colors.DarkGray;
                 frameOrange.BackgroundColor = Colors.Orange;
                 await Task.Delay(2000);
+                if (!isRunning) break;
                 frameOrange.BackgroundColor = Colors.DarkGray;
                 frameGreen.BackgroundColor = Colors.Green;
                 await Task.Delay(5000);
+                if (!isRunning) break;
                 frameGreen.BackgroundColor = Colors.DarkGray;
             }
             else
@@ -87,8 +90,10 @@ public partial class TraficLight : ContentPage
                 //Night type
                 frameOrange.BackgroundColor = Colors.Orange;
                 await Task.Delay(1000);
+                if (!isRunning) break;
                 frameOrange.BackgroundColor = Colors.Gray;
                 await Task.Delay(1000);
+                if (!isRunning) break;
             }
         }
     }
