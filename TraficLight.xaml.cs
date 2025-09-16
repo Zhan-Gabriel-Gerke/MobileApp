@@ -32,7 +32,7 @@ public partial class TraficLight : ContentPage
         
     }
     //End button
-    private async void Button_Clicked_2(object sender, EventArgs e)
+    private void Button_Clicked_2(object sender, EventArgs e)
     {
         isRunning = false;
         Change_Status_Label();

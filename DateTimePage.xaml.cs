@@ -8,6 +8,9 @@ public partial class DateTimePage : ContentPage
 	DatePicker datePicker;
 	TimePicker timePicker;
 	AbsoluteLayout al;
+	Picker picker;
+	Slider slider;
+	Stepper stepper;
     public DateTimePage()
 	{
 		//InitializeComponent();
@@ -16,7 +19,7 @@ public partial class DateTimePage : ContentPage
 			Text = "Mis on valitud",
 			FontSize = 20,
 			TextColor = Colors.Black,
-		};
+		};	
 		datePicker = new DatePicker
 		{
 			FontSize = 20,
@@ -46,22 +49,92 @@ public partial class DateTimePage : ContentPage
 				mis_on_valitud.Text = $"Valitud aeg: {timePicker.Time}";
             }
         };
-
+		picker = new Picker
+		{
+			Title = "Vali midagi",
+			FontSize = 20,
+			BackgroundColor = Color.FromRgb(200, 200, 100),
+			TextColor = Colors.Black,
+		};
+        var options = new List<string> { "Üks", "Kaks", "Kolm", "Neli", "Viis", "Kuus" };
+        foreach (var option in options)
+        {
+            picker.Items.Add(option);
+        }
+		picker.SelectedIndexChanged += (s, e) =>
+		{
+			if (picker.SelectedIndex != -1)
+			{
+				mis_on_valitud.Text = $"Valitud: {picker.Items[picker.SelectedIndex]}";
+			}
+		};
+		slider = new Slider
+		{
+			Minimum = 0,
+			Maximum = 100,
+			Value = 50,
+			BackgroundColor = Color.FromRgb(100, 200, 100),
+			ThumbColor = Colors.Red,
+			MinimumTrackColor = Colors.Green,
+			MaximumTrackColor = Colors.Blue
+        };
+		slider.ValueChanged += (s, e) =>
+		{
+			mis_on_valitud.FontSize = e.NewValue;
+			mis_on_valitud.Rotation = e.NewValue;
+		};
+		stepper = new Stepper
+		{
+			Minimum = 0,
+			Maximum = 100,
+			Increment = 1,
+			Value = 20,
+			BackgroundColor = Color.FromRgb(200, 200, 100),
+			HorizontalOptions = LayoutOptions.Center
+		};
+		stepper.ValueChanged += (s, e) =>
+		{
+			mis_on_valitud.Text = $"Stepper value: {e:NewValue}";
+		};
         al = new AbsoluteLayout
 		{
 			Children = { 				
 				mis_on_valitud,
 				datePicker,
-                timePicker
+                timePicker,
+				picker,
+				slider,
+				stepper
             }
         };
-		AbsoluteLayout.SetLayoutBounds(mis_on_valitud, new Rect(0.5, 0.1, 300, 50));
-		AbsoluteLayout.SetLayoutFlags(mis_on_valitud, AbsoluteLayoutFlags.All);
-		AbsoluteLayout.SetLayoutBounds(datePicker, new Rect(0.5, 0.5, 0.9, 0.2));
+        /*AbsoluteLayout.SetLayoutBounds(mis_on_valitud, new Rect(0.5, 0.0, 300, 50));
+        AbsoluteLayout.SetLayoutFlags(mis_on_valitud, AbsoluteLayoutFlags.PositionProportional);
+        AbsoluteLayout.SetLayoutBounds(datePicker, new Rect(0.5, 0.2, 0.9, 0.2));
 		AbsoluteLayout.SetLayoutFlags(datePicker, AbsoluteLayoutFlags.All);
-        AbsoluteLayout.SetLayoutBounds(timePicker, new Rect(0.5, 0.8, 0.9, 0.2));
+        AbsoluteLayout.SetLayoutBounds(timePicker, new Rect(0.5, 0.4, 0.9, 0.2));
         AbsoluteLayout.SetLayoutFlags(timePicker, AbsoluteLayoutFlags.All);
-        Content = al;
+		AbsoluteLayout.SetLayoutBounds(picker, new Rect(0.5, 0.6, 0.9, 0.2));
+		AbsoluteLayout.SetLayoutFlags(picker, AbsoluteLayoutFlags.All);
+		AbsoluteLayout.SetLayoutBounds(slider, new Rect(0.5, 0.8, 0.9, 0.2));
+		AbsoluteLayout.SetLayoutFlags(slider, AbsoluteLayoutFlags.All);
+		AbsoluteLayout.SetLayoutBounds(stepper, new Rect(0.5, 1, 0.9, 0.2));
+		AbsoluteLayout.SetLayoutFlags(stepper, AbsoluteLayoutFlags.All);*/
+
+		var elementid = new View[]
+		{
+            mis_on_valitud,
+            datePicker,
+            timePicker,
+            picker,
+            slider,
+            stepper
+        };
+		for (int i = 0; i < elementid.Length; i++)
+		{
+			AbsoluteLayout.SetLayoutBounds(elementid[i], new Rect(0.5, 0.1 + i * 0.15, 0.9, 0.13));
+            AbsoluteLayout.SetLayoutFlags(elementid[i], AbsoluteLayoutFlags.All);
+        }
+		Content = al;
         //X, Y, Width, Height
         //X - padding from left side, Y - padding from top side
 
