@@ -28,18 +28,40 @@ public partial class DateTimePage : ContentPage
 			Format = "D"//Full date
         };
         datePicker.DateSelected += DatePicker_DateSelected;
-		al = new AbsoluteLayout
+
+		timePicker = new TimePicker
+		{
+			FontSize = 20,
+			Time = new TimeSpan(12, 0, 0),//12:00 PM
+			//MinimumTime = new TimeSpan(8, 0, 0),//8:00 AM
+			//MaximumTime = new TimeSpan(18, 0, 0),//6:00 PM
+			TextColor = Colors.Green,
+			Format = ""// t - short time, T - long time
+        };
+		timePicker.PropertyChanged += (s, e) =>
+		{
+
+			if (e.PropertyName == TimePicker.TimeProperty.PropertyName)
+			{
+				mis_on_valitud.Text = $"Valitud aeg: {timePicker.Time}";
+            }
+        };
+
+        al = new AbsoluteLayout
 		{
 			Children = { 				
 				mis_on_valitud,
-				datePicker
+				datePicker,
+                timePicker
             }
         };
 		AbsoluteLayout.SetLayoutBounds(mis_on_valitud, new Rect(0.5, 0.1, 300, 50));
 		AbsoluteLayout.SetLayoutFlags(mis_on_valitud, AbsoluteLayoutFlags.All);
 		AbsoluteLayout.SetLayoutBounds(datePicker, new Rect(0.5, 0.5, 0.9, 0.2));
 		AbsoluteLayout.SetLayoutFlags(datePicker, AbsoluteLayoutFlags.All);
-		Content = al;
+        AbsoluteLayout.SetLayoutBounds(timePicker, new Rect(0.5, 0.8, 0.9, 0.2));
+        AbsoluteLayout.SetLayoutFlags(timePicker, AbsoluteLayoutFlags.All);
+        Content = al;
         //X, Y, Width, Height
         //X - padding from left side, Y - padding from top side
 
