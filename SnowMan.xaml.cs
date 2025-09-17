@@ -1,4 +1,5 @@
-﻿using Microsoft.Maui.Controls;
+﻿using MediaManager;
+using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Layouts;
 
@@ -11,15 +12,30 @@ public partial class SnowMan : ContentPage
     Slider slider;
     Stepper stepper;
     AbsoluteLayout al;
-    Frame head, bucketBody, handle, firstRing, secondRing, eye1, eye2, carrot;
+    Frame head, bucketBody, handle, firstRing, secondRing, eye1, eye2, carrot, handL, handR;
     Button action;
     List<Frame> elements;
     Random rnd;
     public SnowMan()
     {
         InitializeComponent();
-
+        CrossMediaManager.Current.Init();
         rnd = new Random();
+
+        handL = new Frame
+        {
+            BackgroundColor = Colors.Black,
+            CornerRadius = 10,
+            HasShadow = false,
+            Padding = 0
+        };
+        handR = new Frame
+        {
+            BackgroundColor = Colors.Black,
+            CornerRadius = 10,
+            HasShadow = false,
+            Padding = 0
+        };
 
         carrot = new Frame
         {
@@ -128,8 +144,7 @@ public partial class SnowMan : ContentPage
             BackgroundColor = Color.FromRgb(100, 100, 100),
             HorizontalOptions = LayoutOptions.Center
         };
-
-        action = new Button
+               action = new Button
         {
             Text = "Do action",
             FontSize = 12,
@@ -141,6 +156,12 @@ public partial class SnowMan : ContentPage
 
         AbsoluteLayout.SetLayoutBounds(carrot, new Rect(0.52, 0.48, 5, 40));
         AbsoluteLayout.SetLayoutFlags(carrot, AbsoluteLayoutFlags.PositionProportional);
+
+        AbsoluteLayout.SetLayoutBounds(handR, new Rect(0.25, 0.6, 65, 8));
+        AbsoluteLayout.SetLayoutFlags(handR, AbsoluteLayoutFlags.PositionProportional);
+
+        AbsoluteLayout.SetLayoutBounds(handL, new Rect(0.75, 0.6, 65, 8));
+        AbsoluteLayout.SetLayoutFlags(handL, AbsoluteLayoutFlags.PositionProportional);
 
         AbsoluteLayout.SetLayoutBounds(eye1, new Rect(0.6, 0.48, 10, 10));
         AbsoluteLayout.SetLayoutFlags(eye1, AbsoluteLayoutFlags.PositionProportional);
@@ -175,16 +196,64 @@ public partial class SnowMan : ContentPage
         AbsoluteLayout.SetLayoutBounds(stepper, new Rect(0.98, 1 ,100, 50));
         AbsoluteLayout.SetLayoutFlags(stepper, AbsoluteLayoutFlags.PositionProportional);
 
-        elements = new List<Frame> { head, firstRing, secondRing, bucketBody, handle, eye2, eye1 };
+        elements = new List<Frame> { head, firstRing, secondRing, bucketBody,
+                                     handle, eye2, eye1, handL, handR, carrot };
 
         al = new AbsoluteLayout
         {
             Children =
             {
-                head, firstRing, secondRing, bucketBody, handle, picker, slider, stepper, action, carrot, eye1, eye2
+                head, firstRing, secondRing, bucketBody, handle, picker, 
+                slider, stepper, action, carrot, eye1, eye2, handL, handR
             }
         };
         Content = al;
+    }
+
+    private async void Btn_Clicked_Melt()
+    {
+        for (int i = 0; i < elements.Count; i++)
+        {
+            elements[i].ScaleTo(0.1, 2000);
+            elements[i].FadeTo(0, 2000);
+        }
+    }
+    
+    private async void Btn_Clicked_Dance()
+    {
+        await CrossMediaManager.Current.Play("https://ia800404.us.archive.org/32/items/careless-whisper_202306/CarelessWhisper.mp3");
+
+        List<Task> moveLTasks = new List<Task>();
+        for (int i = 0; i < elements.Count; i++)
+        {
+            var cords = AbsoluteLayout.GetLayoutBounds(elements[i]);
+            moveLTasks.Add(elements[i].LayoutTo(new Rect(cords.X - 0.3, cords.Y, cords.Width, cords.Height), 3000));
+        }
+        
+        await Task.WhenAll(moveLTasks);
+
+        List<Task> moveRTasks = new List<Task>();
+
+        for (int i = 0; i < elements.Count; i++)
+        {
+            var cords = AbsoluteLayout.GetLayoutBounds(elements[i]);
+            moveRTasks.Add(elements[i].LayoutTo(new Rect(cords.X + 0.4, cords.Y, cords.Width, cords.Height), 3000));
+        }
+
+        await Task.WhenAll(moveRTasks);
+
+        List<Task> tasks = new List<Task>();
+        for (int i = 0; i < elements.Count; i++)
+        {
+            tasks.Add(elements[i].RotateTo(360, 1000));
+        }
+
+        await Task.WhenAll(tasks);
+
+        foreach (var el in elements)
+        {
+            el.Rotation = 0;
+        }
     }
 
     private async void Btn_Clicked(object? sender, EventArgs e)
@@ -214,10 +283,10 @@ public partial class SnowMan : ContentPage
                 secondRing.BackgroundColor = randomColor;
                 break;
             case "Melt":
-
+                Btn_Clicked_Melt();
                 break;
             case "Dance":
-
+                Btn_Clicked_Dance();
                 break;
             case "The regular color":
                 head.BackgroundColor = Colors.LightGray;
