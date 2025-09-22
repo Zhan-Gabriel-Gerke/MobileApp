@@ -336,17 +336,19 @@ public partial class SnowMan : ContentPage
         for (int i = 0; i < elements.Count; i++)
         {
             var cords = AbsoluteLayout.GetLayoutBounds(elements[i]);
-            moveLTasks.Add(elements[i].LayoutTo(new Rect(cords.X - 0.3, cords.Y, cords.Width, cords.Height), 3000));
+            moveLTasks.Add(elements[i].LayoutTo(new Rect(cords.X - 0.3, cords.Y, cords.Width, cords.Height), 1));
         }
         
         await Task.WhenAll(moveLTasks);
+
+        await Task.Delay(5000);
 
         List<Task> moveRTasks = new List<Task>();
 
         for (int i = 0; i < elements.Count; i++)
         {
             var cords = AbsoluteLayout.GetLayoutBounds(elements[i]);
-            moveRTasks.Add(elements[i].LayoutTo(new Rect(cords.X + 0.4, cords.Y, cords.Width, cords.Height), 3000));
+            moveRTasks.Add(elements[i].LayoutTo(new Rect(cords.X + 0.4, cords.Y, cords.Width, cords.Height), 1));
         }
 
         await Task.WhenAll(moveRTasks);
