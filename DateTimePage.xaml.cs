@@ -56,17 +56,37 @@ public partial class DateTimePage : ContentPage
 			BackgroundColor = Color.FromRgb(200, 200, 100),
 			TextColor = Colors.Black,
 		};
-        var options = new List<string> { "Üks", "Kaks", "Kolm", "Neli", "Viis", "Kuus" };
-        foreach (var option in options)
-        {
-            picker.Items.Add(option);
-        }
+		picker.ItemsSource = new List<string> { "Teade", "Jah / Ei teade", "Valik", "Vaba vastus" };
+
+
+        //foreach (var option in options)
+        //{
+        //    picker.Items.Add(option);
+        //}
 		picker.SelectedIndexChanged += (s, e) =>
 		{
 			if (picker.SelectedIndex != -1)
 			{
 				mis_on_valitud.Text = $"Valitud: {picker.Items[picker.SelectedIndex]}";
-			}
+				if (picker.SelectedIndex ==0)
+				{
+					DisplayAlert("Teade", "Mis ole hea uudis", "Selge");
+                }
+				else if (picker.SelectedIndex == 1)
+				{
+					DisplayAlert("Kusimus", "Kas soovite jätkata?", "Jah", "Ei");
+                }
+				else if (picker.SelectedIndex == 2)
+				{
+					var valik = new string[] { "Võimalus 1", "Võimalus 2", "Võimalus 3" };
+					var tulemus = DisplayActionSheet("Vali võimal", "Katkesta", null, valik);
+                }
+				else if (picker.SelectedIndex == 3)
+				{
+					var tulemus = DisplayPromptAsync("Küsimus", "Kirjuta oma vastus", "OK", "Katkesta", "Siia tuleb vastus", 20, Keyboard.Text, "Vaikimisi vastus");
+                }
+
+            }
 		};
 		slider = new Slider
 		{

@@ -4,8 +4,8 @@ namespace AnExample;
 
 public partial class NewPage1 : ContentPage
 {
-	public List<ContentPage> pagesE = new List<ContentPage>() { new TextPage(), new FigurePage(), new TimerPage(), new TraficLight() ,new SnowMan(), new DateTimePage() };
-	public List<string> textsE = new List<string>() { "Text Page !!!", "Figure Page !!!", "Timer Page !!!", "Trafic Light", "SnowMan", "DateTimePage" };
+	public List<ContentPage> pagesE = new List<ContentPage>() { new TextPage(), new FigurePage(), new TimerPage(), new TraficLight() ,new SnowMan(), new DateTimePage(), new GridPage() };
+	public List<string> textsE = new List<string>() { "Text Page !!!", "Figure Page !!!", "Timer Page !!!", "Trafic Light", "SnowMan", "DateTimePage", "Grid" };
 	ScrollView sv;
 	VerticalStackLayout vsl;
 	public NewPage1()
