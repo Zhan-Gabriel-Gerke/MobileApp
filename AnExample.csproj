@@ -78,6 +78,9 @@
 	  <MauiXaml Update="NewPage1.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="PulsePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="SnowMan.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
